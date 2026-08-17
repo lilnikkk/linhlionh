@@ -1,0 +1,105 @@
+server:
+  port: 2333
+  address: 0.0.0.0
+  http2:
+    enabled: false
+  password: "${LAVALINK_PASSWORD}"
+  sources:
+    youtube: false
+    bandcamp: true
+    soundcloud: true
+    twitch: true
+    vimeo: true
+    nico: false
+    http: true
+    local: false
+  filters:
+    volume: true
+    equalizer: true
+    karaoke: true
+    timescale: true
+    tremolo: true
+    vibrato: true
+    distortion: true
+    rotation: true
+    channelMix: true
+    lowPass: true
+  bufferDurationMs: 400
+  frameBufferDurationMs: 5000
+  opusEncodingQuality: 5
+  resamplingQuality: LOW
+  trackStuckThresholdMs: 10000
+  useSeekGhosting: true
+  playerUpdateInterval: 5
+  youtubeSearchEnabled: true
+  soundcloudSearchEnabled: true
+  gc-warnings: true
+
+lavalink:
+  plugins:
+    - dependency: "dev.lavalink.youtube:youtube-plugin:1.18.1"
+      repository: "https://maven.lavalink.dev/releases"
+      snapshot: false
+    - dependency: "com.github.topi314.lavasrc:lavasrc-plugin:4.8.3"
+      repository: "https://maven.lavalink.dev/releases"
+      snapshot: false
+  pluginsDir: "./plugins"
+  defaultPluginRepository: "https://maven.lavalink.dev/releases"
+  defaultPluginSnapshotRepository: "https://maven.lavalink.dev/snapshots"
+
+plugins:
+  youtube:
+    enabled: true
+    allowSearch: true
+    allowDirectVideoIds: true
+    allowDirectPlaylistIds: true
+    clients:
+      - MUSIC
+      - WEB
+      - WEBEMBEDDED
+      - ANDROID_MUSIC
+      - ANDROID_VR
+      - IOS
+      - MWEB
+
+  lavasrc:
+    providers:
+      - "ytsearch:\"%ISRC%\""
+      - "ytsearch:%QUERY%"
+      - "scsearch:%QUERY%"
+    sources:
+      spotify: true
+      applemusic: false
+      deezer: false
+      yandexmusic: false
+      flowerytts: false
+      youtube: false
+      vkmusic: false
+      tidal: false
+      qobuz: false
+      ytdlp: false
+      jiosaavn: false
+    lyrics-sources:
+      spotify: false
+      deezer: false
+      youtube: false
+      yandexmusic: false
+      vkmusic: false
+      lrcLib: true
+    spotify:
+      clientId: "${SPOTIFY_CLIENT_ID}"
+      clientSecret: "${SPOTIFY_CLIENT_SECRET}"
+      countryCode: "VN"
+      playlistLoadLimit: 10
+      albumLoadLimit: 10
+      resolveArtistsInSearch: true
+      localFiles: false
+
+metrics:
+  prometheus:
+    enabled: false
+
+logging:
+  level:
+    root: INFO
+    lavalink: INFO
